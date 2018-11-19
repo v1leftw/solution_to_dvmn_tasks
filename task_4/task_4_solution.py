@@ -6,14 +6,6 @@ from itertools import groupby
 
 def get_args():
     """
-        - why are we not using argparse?:)
-        - use it if u can
-        - would like to use it,
-        but in site script calls with argument like that:
-        $python3 sctipt.py "argument"
-        for argparse we need use it like (as far as i know):
-        $python3 script.py -argument "argument"
-        -------------------------
         artist_name = sys.argv[1]
     """
     return sys.argv[1]
@@ -26,15 +18,10 @@ def get_mp3_files(directory_path):
                 yield os.path.abspath(os.path.join(root, filename))
 
 
-def get_tags(path_to_mp3_file):
-    tags = TinyTag.get(path_to_mp3_file)
-    return tags
-
-
 def create_music_collection(mp3_files):
     collection = []
     for mp3_file in mp3_files:
-        collection.append([mp3_file, get_tags(mp3_file)])
+        collection.append([mp3_file, TinyTag.get(mp3_file)])
     return collection
 
 
@@ -42,12 +29,8 @@ def filter_collection_by_criteria(collection, criteria):
     return [
         [_path, tags]
         for _path, tags in collection
-        if is_equal_to_given_artist_name(criteria, tags)
+        if tags.artist == criteria
     ]
-
-
-def is_equal_to_given_artist_name(criteria, tag):
-    return tag.artist == criteria
 
 
 def group_collection_by_album(collection):
