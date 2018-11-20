@@ -16,4 +16,4 @@ Solution in task_4 directory\
 `Script will not execute without argument. Artist name as argument must be passed`
 
 **Task 5. Create function that decodes base64 string to dictionary**\
-Solution in task_5 directory\
+Solution in task_5 directory
